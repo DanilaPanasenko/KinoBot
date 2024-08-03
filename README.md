@@ -1,0 +1,2 @@
+# KinoBot
+my pet-project
