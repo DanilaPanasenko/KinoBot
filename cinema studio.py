@@ -2,6 +2,7 @@ import asyncio
 import logging
 import requests
 import random
+import os
 from aiogram import Bot, Dispatcher, types
 from aiogram.filters.command import Command
 from aiogram import F
@@ -10,9 +11,12 @@ from aiogram import html
 from aiogram.types import URLInputFile, InputMediaPhoto
 from bs4 import BeautifulSoup
 from aiogram.utils.keyboard import InlineKeyboardBuilder, ReplyKeyboardBuilder
+from dotenv import load_dotenv
+
+load_dotenv()
 
 logging.basicConfig(level=logging.INFO)
-bot = Bot(token="6573804900:AAEHodUK-x9v-VDt26zdN1r-X-I0hCSfMI4")
+bot = Bot(os.getenv('token'))
 dp = Dispatcher()
 
 async def start(message: types.Message):
