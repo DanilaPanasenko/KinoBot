@@ -2,6 +2,7 @@ import asyncio
 import logging
 import requests
 import random
+import os
 from aiogram import Bot, Dispatcher, types
 from aiogram.filters.command import Command
 from aiogram import F
@@ -10,9 +11,12 @@ from aiogram import html
 from aiogram.types import URLInputFile, InputMediaPhoto
 from bs4 import BeautifulSoup
 from aiogram.utils.keyboard import InlineKeyboardBuilder, ReplyKeyboardBuilder
+from dotenv import load_dotenv
+
+load_dotenv()
 
 logging.basicConfig(level=logging.INFO)
-bot = Bot(token="6573804900:AAEHodUK-x9v-VDt26zdN1r-X-I0hCSfMI4")
+bot = Bot(os.getenv('token'))
 dp = Dispatcher()
 
 async def start(message: types.Message):
@@ -22,8 +26,8 @@ async def start(message: types.Message):
     builder.row(types.InlineKeyboardButton(text='биография 📖', callback_data='film_biografiya'))
     builder.row(types.InlineKeyboardButton(text='боевики 🔫', callback_data='film_boeviki'))
     builder.row(types.InlineKeyboardButton(text='детективы 🕵️‍♂️', callback_data='film_detektivy'))
-    builder.row(types.InlineKeyboardButton(text='драммы 😢', callback_data='film_dramy'))
-    builder.row(types.InlineKeyboardButton(text='мелодраммы 💑', callback_data='film_melodrama'))
+    builder.row(types.InlineKeyboardButton(text='драмы 😢', callback_data='film_dramy'))
+    builder.row(types.InlineKeyboardButton(text='мелодрамы 💑', callback_data='film_melodrama'))
     builder.row(types.InlineKeyboardButton(text='мультики 👶', callback_data='film_multfilmy-v1'))
     builder.row(types.InlineKeyboardButton(text='приключения 🏔', callback_data='film_priklyucheniya'))
     builder.row(types.InlineKeyboardButton(text='ужасы 🧟‍♂️', callback_data='film_uzhasy'))
@@ -34,7 +38,7 @@ async def start(message: types.Message):
 @dp.message(Command("start"))
 async def hello_start(message: types.Message):
     builder = InlineKeyboardBuilder()
-    builder.row(types.InlineKeyboardButton(text='Категрии 🗒', callback_data='start_category'))
+    builder.row(types.InlineKeyboardButton(text='Категории 🗒', callback_data='start_category'))
     await message.answer(
         f"Привет, <b>{html.bold(html.quote(message.from_user.full_name))}</b>👋. Нажми на кнопку ниже, чтобы выбрать "
         f"вашу любимую категорию и бот пришлет вам подходящий фильм 🎥. ",
